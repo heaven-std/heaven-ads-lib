@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sub_title_splash">此操作可能包含广告！</string>
+
+    <string name="title_force_update">新版本可用！</string>
+    <string name="description_force_update">请更新应用到新版本以继续。</string>
+    <string name="no_thanks_force_update">不，谢谢</string>
+    <string name="update_force_update">更新</string>
+    <!--Rating-->
+    <string name="txt_ok">好的</string>
+    <string name="rate">评分</string>
+    <string name="not_now">暂不</string>
+    <string name="do_you_like_our_app">您喜欢我们的应用吗？</string>
+    <string name="give_us_a_quick_rating">给我们一个快速评分，以便我们知道您是否喜欢。</string>
+    <string name="thanks_for_the_rating">感谢您的评分</string>
+    <string name="we_are_working_hard">我们正在努力提供更好的用户体验。</string>
+    <string name="that_great_to_hear">很高兴听到您对产品满意。</string>
+    <string name="thanks_for_rating">感谢您的评分！</string>
+    <!--Language-->
+    <string name="title_language">语言</string>
+    <string name="subtitle_language">请选择您的母语。稍后可以从设置中更改语言。</string>
+    <!--Intro-->
+    <string name="next">下一步</string>
+    <string name="start">开始</string>
+
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <string name="sub_title_splash">Esta ação pode conter anúncios!</string>
+        <string name="title_force_update">Nova versão disponível!</string>
+        <string name="description_force_update">Por favor, atualize o aplicativo para a nova versão para continuar.</string>
+        <string name="no_thanks_force_update">Não, obrigado</string>
+        <string name="update_force_update">Atualizar</string>
+        <!--Rating-->
+        <string name="txt_ok">OK</string>
+        <string name="rate">Avaliar</string>
+        <string name="not_now">Agora não</string>
+        <string name="do_you_like_our_app">Você gosta do nosso aplicativo?</string>
+        <string name="give_us_a_quick_rating">Dê-nos uma avaliação rápida para sabermos se você gosta.</string>
+        <string name="thanks_for_the_rating">Obrigado pela avaliação</string>
+        <string name="we_are_working_hard">Estamos trabalhando duro para uma melhor experiência do usuário.</string>
+        <string name="that_great_to_hear">É ótimo saber que você está satisfeito com o produto.</string>
+        <string name="thanks_for_rating">Obrigado pela sua avaliação!</string>
+        <!--Language-->
+        <string name="title_language">Idioma</string>
+        <string name="subtitle_language">Escolha seu idioma nativo. Você pode alterar o idioma nas configurações posteriormente.</string>
+        <!--Intro-->
+        <string name="next">Próximo</string>
+        <string name="start">Iniciar</string>
+
+</resources>

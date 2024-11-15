@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sub_title_splash">Tindakan ini dapat berisi iklan!</string>
+
+    <string name="title_force_update">Versi baru tersedia!</string>
+    <string name="description_force_update">Silakan perbarui aplikasi ke versi terbaru untuk melanjutkan.</string>
+    <string name="no_thanks_force_update">Tidak, terima kasih</string>
+    <string name="update_force_update">Perbarui</string>
+    <!--Rating-->
+    <string name="txt_ok">OK</string>
+    <string name="rate">Beri Nilai</string>
+    <string name="not_now">Tidak sekarang</string>
+    <string name="do_you_like_our_app">Apakah Anda menyukai aplikasi kami?</string>
+    <string name="give_us_a_quick_rating">Beri kami peringkat cepat agar kami tahu jika Anda menyukainya.</string>
+    <string name="thanks_for_the_rating">Terima kasih atas penilaian Anda</string>
+    <string name="we_are_working_hard">Kami bekerja keras untuk pengalaman pengguna yang lebih baik.</string>
+    <string name="that_great_to_hear">Senang mendengar Anda puas dengan produk ini.</string>
+    <string name="thanks_for_rating">Terima kasih atas penilaian Anda!</string>
+    <!--Language-->
+    <string name="title_language">Bahasa</string>
+    <string name="subtitle_language">Silakan pilih bahasa asli Anda. Anda dapat mengubah bahasa dari pengaturan nanti.</string>
+    <!--Intro-->
+    <string name="next">Lanjut</string>
+    <string name="start">Mulai</string>
+
+</resources>

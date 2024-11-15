@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sub_title_splash">このアクションには広告が含まれる場合があります！</string>
+    <string name="title_force_update">新しいバージョンが利用可能です！</string>
+    <string name="description_force_update">続行するにはアプリを新しいバージョンに更新してください。</string>
+    <string name="no_thanks_force_update">いいえ、結構です</string>
+    <string name="update_force_update">更新</string>
+    <!--Rating-->
+    <string name="txt_ok">OK</string>
+    <string name="rate">評価</string>
+    <string name="not_now">今はしない</string>
+    <string name="do_you_like_our_app">このアプリは気に入りましたか？</string>
+    <string name="give_us_a_quick_rating">気に入ったかどうか教えてください。</string>
+    <string name="thanks_for_the_rating">評価ありがとうございます</string>
+    <string name="we_are_working_hard">より良いユーザー体験のために努力しています。</string>
+    <string name="that_great_to_hear">製品に満足していただき嬉しいです。</string>
+    <string name="thanks_for_rating">評価ありがとうございます！</string>
+    <!--Language-->
+    <string name="title_language">言語</string>
+    <string name="subtitle_language">母国語を選択してください。後で設定から変更できます。</string>
+    <!--Intro-->
+    <string name="next">次へ</string>
+    <string name="start">開始</string>
+</resources>

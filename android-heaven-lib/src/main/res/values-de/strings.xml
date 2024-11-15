@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sub_title_splash">Diese Aktion kann Werbung enthalten!</string>
+    <string name="title_force_update">Neue Version verfügbar!</string>
+    <string name="description_force_update">Bitte aktualisieren Sie die App auf die neue Version, um fortzufahren.</string>
+    <string name="no_thanks_force_update">Nein, danke</string>
+    <string name="update_force_update">Aktualisieren</string>
+    <!--Rating-->
+    <string name="txt_ok">OK</string>
+    <string name="rate">Bewerten</string>
+    <string name="not_now">Nicht jetzt</string>
+    <string name="do_you_like_our_app">Gefällt Ihnen unsere App?</string>
+    <string name="give_us_a_quick_rating">Geben Sie uns eine kurze Bewertung, damit wir wissen, ob es Ihnen gefällt.</string>
+    <string name="thanks_for_the_rating">Danke für die Bewertung</string>
+    <string name="we_are_working_hard">Wir arbeiten hart an einer besseren Benutzererfahrung.</string>
+    <string name="that_great_to_hear">Es ist großartig zu hören, dass Sie zufrieden mit dem Produkt sind.</string>
+    <string name="thanks_for_rating">Vielen Dank für Ihre Bewertung!</string>
+    <!--Language-->
+    <string name="title_language">Sprache</string>
+    <string name="subtitle_language">Bitte wählen Sie Ihre Muttersprache. Sie können die Sprache später in den Einstellungen ändern.</string>
+    <!--Intro-->
+    <string name="next">Weiter</string>
+    <string name="start">Start</string>
+</resources>
