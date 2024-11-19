@@ -1,4 +1,4 @@
-package com.heaven.android.heavenlib.datas
+package com.heaven.android.heavenlib.ump
 
 import android.app.Activity
 import com.google.android.ump.ConsentDebugSettings
@@ -7,20 +7,15 @@ import com.google.android.ump.ConsentRequestParameters
 import com.google.android.ump.UserMessagingPlatform
 import com.heaven.android.heavenlib.config.HeavenEnv
 
-interface IUmpListener {
-    fun requestConsentCompleted(err: String?)
-}
-
-object UMPUtils {
+class UmpHelperImpl(val activity: Activity) : UMPHelper {
     private lateinit var consentInformation: ConsentInformation
 
-
-    fun requestConsent(activity: Activity, listener: IUmpListener) {
+    override fun requestConsent(listener: IUmpListener) {
         val debugSettings = ConsentDebugSettings.Builder(activity)
 
         if (HeavenEnv.buildConfig.isDebug) {
             debugSettings.setDebugGeography(ConsentDebugSettings.DebugGeography.DEBUG_GEOGRAPHY_EEA)
-            debugSettings.addTestDeviceHashedId("61AFC09657EC976743A413E0ECC4CD30")
+            debugSettings.addTestDeviceHashedId(HeavenEnv.buildConfig.deviceIdUMPDebug)
         }
 
         val paramsBuilder = ConsentRequestParameters.Builder()
@@ -28,7 +23,6 @@ object UMPUtils {
             paramsBuilder.setConsentDebugSettings(debugSettings.build())
         }
         val params = paramsBuilder.build()
-
 
         consentInformation = UserMessagingPlatform.getConsentInformation(activity)
         consentInformation.requestConsentInfoUpdate(
@@ -50,4 +44,6 @@ object UMPUtils {
                 listener.requestConsentCompleted(requestConsentError.message)
             })
     }
+
 }
+

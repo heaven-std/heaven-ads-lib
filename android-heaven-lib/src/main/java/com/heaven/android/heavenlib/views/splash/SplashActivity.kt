@@ -14,11 +14,13 @@ import com.heaven.android.heavenlib.databinding.ActivitySplashBinding
 import com.heaven.android.heavenlib.datas.FBConfig
 import com.heaven.android.heavenlib.datas.HeavenSharePref
 import com.heaven.android.heavenlib.datas.IRemoteCFListener
-import com.heaven.android.heavenlib.datas.IUmpListener
-import com.heaven.android.heavenlib.datas.UMPUtils
-import com.heaven.android.heavenlib.datas.models.StatusForceUpdate
+import com.heaven.android.heavenlib.ump.IUmpListener
+import com.heaven.android.heavenlib.ump.UMPHelper
+import com.heaven.android.heavenlib.ump.UmpHelperImpl
+import com.heaven.android.heavenlib.update_app.AppUpdateHelper
+import com.heaven.android.heavenlib.update_app.AppUpdateHelperImpl
+import com.heaven.android.heavenlib.update_app.IAppUpdateListener
 import com.heaven.android.heavenlib.utils.Logger
-import com.heaven.android.heavenlib.utils.Utils.isNeedUpdateAppVersions
 import com.heaven.android.heavenlib.views.intro.IntroActivity
 import com.heaven.android.heavenlib.views.language.LanguageActivity
 import kotlinx.coroutines.async
@@ -29,12 +31,18 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     private val adUnitInter = HeavenEnv.configAdUnitID.interSplash
     private val configApp = HeavenEnv.configStyleApp
 
+    private lateinit var umpHelper: UMPHelper
+    private lateinit var appUpdateHelper: AppUpdateHelper
+
     override fun makeBinding(layoutInflater: LayoutInflater): ActivitySplashBinding {
         return ActivitySplashBinding.inflate(layoutInflater)
     }
 
     override fun setupView(savedInstanceState: Bundle?) {
         super.setupView(savedInstanceState)
+        //
+        umpHelper = UmpHelperImpl(this)
+        appUpdateHelper = AppUpdateHelperImpl(this)
         //setup view
         with(binding) {
             imgBg.setImageResource(configApp.backgroundApp)
@@ -49,14 +57,12 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     }
 
     private fun requestConsent() {
-        UMPUtils.requestConsent(
-            this,
-            object : IUmpListener {
-                override fun requestConsentCompleted(err: String?) {
-                    Logger.log("requestConsent", "$err")
-                    initMobileAds()
-                }
-            })
+        umpHelper.requestConsent(object : IUmpListener {
+            override fun requestConsentCompleted(err: String?) {
+                Logger.log("requestConsent", "$err")
+                initMobileAds()
+            }
+        })
     }
 
     private fun fetchRMCF() {
@@ -82,41 +88,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     }
 
     private fun checkUpdate() {
-        val data = FBConfig.getAppVersionConfig()
-        val statusUpdate = isNeedUpdateAppVersions(HeavenEnv.buildConfig.versionName, data)
-        Logger.log("TAG", "status update: $statusUpdate")
-
-        when (statusUpdate) {
-            StatusForceUpdate.NONE -> {
-                runOnUiThread {
-                    showAdsInter()
-                }
+        appUpdateHelper.checkUpdate(object : IAppUpdateListener {
+            override fun onDismiss() {
+                showAdsInter()
             }
-            StatusForceUpdate.HAS_NO_THANKS -> {
-                Logger.log("TAG", "checkUpdate===: HAS_NO_THANKS")
-                showDialogForceUpdate(false,
-                    onClickUpdate = {
-                        runOnUiThread {
-                            onClickUpdateDialog()
-                        }
-                    },
-                    onClickNoThanks = {
-                        runOnUiThread {
-                            onClickNoThankDialog()
-                        }
-                    })
-            }
-            StatusForceUpdate.ONLY_UPDATE -> {
-                Logger.log("TAG", "checkUpdate===: ONLY_UPDATE")
-                showDialogForceUpdate(true,
-                    onClickUpdate = {
-                        onClickUpdateDialog()
-                    },
-                    onClickNoThanks = {
-                        onClickNoThankDialog()
-                    })
-            }
-        }
+        })
     }
 
     private fun showAdsInter() {
@@ -147,30 +123,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             startActivity(intent)
             finish()
         }
-    }
-
-    private fun onClickNoThankDialog() {
-        dismissDialogForceUpdate()
-        showAdsInter()
-    }
-
-    private fun onClickUpdateDialog() {
-        try {
-            startActivity(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("market://details?id=${HeavenEnv.buildConfig.applicationId}")
-                )
-            )
-        } catch (e: ActivityNotFoundException) {
-            startActivity(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("https://play.google.com/store/apps/details?id=${HeavenEnv.buildConfig.applicationId}")
-                )
-            )
-        }
-        finish()
     }
 
     private fun preLoadAdLanguage() = activityScope.launch {

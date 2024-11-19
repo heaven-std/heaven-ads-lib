@@ -3,7 +3,7 @@ package com.heaven.android.heavenlib.utils
 import android.util.Log
 import com.heaven.android.heavenlib.config.HeavenEnv
 import com.heaven.android.heavenlib.datas.models.AppVersionModel
-import com.heaven.android.heavenlib.datas.models.StatusForceUpdate
+import com.heaven.android.heavenlib.update_app.StatusForceUpdate
 
 object Utils {
     fun isNeedUpdateAppVersions(

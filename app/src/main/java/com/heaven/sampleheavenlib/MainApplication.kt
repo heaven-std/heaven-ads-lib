@@ -6,10 +6,9 @@ import com.heaven.android.heavenlib.config.ConfigBuildInfo
 import com.heaven.android.heavenlib.config.ConfigIntro
 import com.heaven.android.heavenlib.config.ConfigLanguage
 import com.heaven.android.heavenlib.config.ConfigSplash
-import com.heaven.android.heavenlib.config.ConfigStyleApp
+import com.heaven.android.heavenlib.config.ConfigStyleAD
 import com.heaven.android.heavenlib.config.HeavenEnv
 import com.heaven.android.heavenlib.config.IAdUnitID
-import com.heaven.android.heavenlib.datas.HeavenSharePref
 import com.heaven.android.heavenlib.datas.models.AppIntro
 import com.heaven.android.heavenlib.datas.models.AppLanguage
 
@@ -106,8 +105,8 @@ class MainApplication : HeavenApplication() {
         return config
     }
 
-    private fun configStyleApp(): ConfigStyleApp {
-        val config = ConfigStyleApp.Builder()
+    private fun configStyleApp(): ConfigStyleAD {
+        val config = ConfigStyleAD.Builder()
             .setBackgroundApp(R.drawable.img_bg_app)
             .setBackgroundButtonAD(R.drawable.bg_btn_ad)
             .setBackgroundIconChoiceAD(R.drawable.bg_ad_choice)

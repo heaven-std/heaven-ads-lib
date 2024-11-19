@@ -6,7 +6,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import com.heaven.android.heavenlib.R
 
-class ConfigStyleApp private constructor(
+class ConfigStyleAD private constructor(
     val backgroundApp: Int,
     val backgroundButtonAD: Int,
     val backgroundAdNormalAD: Int,
@@ -36,8 +36,8 @@ class ConfigStyleApp private constructor(
         fun setTextColorButtonAD(@ColorInt textColorButtonAD: Int) = apply { this.textColorButtonAD = textColorButtonAD }
         fun setTextColorAdChoiceAD(@ColorInt textColorAdChoiceAD: Int) = apply { this.textColorAdChoiceAD = textColorAdChoiceAD }
 
-        fun build(): ConfigStyleApp {
-            return ConfigStyleApp(
+        fun build(): ConfigStyleAD {
+            return ConfigStyleAD(
                 backgroundApp,
                 backgroundButtonAD,
                 backgroundAdNormalAD,

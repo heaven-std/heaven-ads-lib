@@ -129,9 +129,7 @@ object HeavenInterstitialAD {
         isSplashAd: Boolean = false,
         enable: Boolean,
         onDone: (String) -> Unit
-    ) {
-
-    }
+    ) {  }
 
     private fun checkDurationShowAds(): Boolean {
         return if (durationShowInterAds == null) {

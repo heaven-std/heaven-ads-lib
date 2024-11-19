@@ -1,8 +1,6 @@
 package com.heaven.android.heavenlib.config
 
-import com.heaven.android.heavenlib.HeavenApplication
 import com.heaven.android.heavenlib.datas.HeavenSharePref
-import com.heaven.android.heavenlib.datas.models.AppLanguage
 import java.lang.RuntimeException
 
 object HeavenEnv {
@@ -35,8 +33,8 @@ object HeavenEnv {
             ?: throw RuntimeException("HeavenEnv: AD Unit config not initialized!")
 
     // Config style app
-    private var _configStyleApp: ConfigStyleApp? = null
-    val configStyleApp: ConfigStyleApp
+    private var _configStyleApp: ConfigStyleAD? = null
+    val configStyleApp: ConfigStyleAD
         get() = _configStyleApp
             ?: throw RuntimeException("HeavenEnv: Config Style App not initialized!")
 
@@ -49,7 +47,7 @@ object HeavenEnv {
         configIntro: ConfigIntro,
         configLanguage: ConfigLanguage,
         configAdUnitID: IAdUnitID,
-        configStyleApp: ConfigStyleApp
+        configStyleApp: ConfigStyleAD
     ) {
         _buildConfig = buildConfig
         _configSplash = configSplash
