@@ -10,18 +10,23 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.heaven.android.heavenlib.ads.HeavenBannerAD
 import com.heaven.android.heavenlib.ads.HeavenInterstitialAD
 import com.heaven.android.heavenlib.ads.HeavenNativeAd
 import com.heaven.android.heavenlib.ads.HeavenRewardAD
 import com.heaven.android.heavenlib.ads.TypeNativeAd
-import com.heaven.android.heavenlib.config.HeavenEnv
 import com.heaven.android.heavenlib.datas.FBConfig
-import com.heaven.android.heavenlib.views.language.LanguageActivity
+import com.heaven.android.heavenlib.dialogs.LoadingDialog
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private val adUnitID = AdUnitID
     private val fbConfig = FBConfig.getAdsConfig()
+    private lateinit var loadingDialog: LoadingDialog
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,8 +38,9 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        loadingDialog = LoadingDialog()
         //
-        findViewById<Button>(R.id.btnLoadReward).setOnClickListener{
+        findViewById<Button>(R.id.btnLoadReward).setOnClickListener {
             HeavenRewardAD.loadAd(
                 this,
                 "ca-app-pub-3940256099942544/5224354917",
@@ -45,15 +51,22 @@ class MainActivity : AppCompatActivity() {
             )
         }
         findViewById<Button>(R.id.btnLoadInter).setOnClickListener {
-            HeavenInterstitialAD.loadInterAd(
-                this,
-                "ca-app-pub-3940256099942544/1033173712",
-                isSplashAd = true,
-                enable = FBConfig.getAdsConfig().enable_inter_splash,
-                onDone = { error ->
-                    Toast.makeText(this, "Collected inter", Toast.LENGTH_SHORT).show()
-                }
-            )
+            lifecycleScope.launch {
+                loadingDialog.show(supportFragmentManager, loadingDialog.tag)
+                HeavenInterstitialAD.loadAndDisplay(
+                    this@MainActivity,
+                    "ca-app-pub-3940256099942544/1033173712",
+                    isSplashAd = true,
+                    enable = FBConfig.getAdsConfig().enable_inter_splash,
+                    onDone = { error ->
+                        loadingDialog.dismiss()
+                        Toast.makeText(this@MainActivity, "Collected inter", Toast.LENGTH_SHORT).show()
+                        Intent(this@MainActivity, NextActivity::class.java).also {
+                            startActivity(it)
+                        }
+                    }
+                )
+            }
         }
 
         loadNativeFullAd()
@@ -67,8 +80,7 @@ class MainActivity : AppCompatActivity() {
             applicationContext,
             adUnitID.otherAdID,
             enableAd,
-            parentView,
-            type = TypeNativeAd.FULL_AD
+            parentView
         )
     }
 
@@ -86,7 +98,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         val vAd = findViewById<FrameLayout>(R.id.frAd)
-        HeavenBannerAD.loopLoadBanner(this,"ca-app-pub-3940256099942544/9214589741", true, vAd)
+        HeavenBannerAD.loopLoadBanner(this, "ca-app-pub-3940256099942544/9214589741", true, vAd)
     }
 
     override fun onPause() {

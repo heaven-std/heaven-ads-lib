@@ -120,7 +120,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     }
 
     private fun showAdsInter() {
-        HeavenInterstitialAD.loadInterAd(
+        HeavenInterstitialAD.loadAndDisplay(
             this,
             adUnitInter,
             isSplashAd = true,

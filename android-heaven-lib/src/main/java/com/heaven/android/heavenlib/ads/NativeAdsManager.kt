@@ -89,7 +89,7 @@ object HeavenNativeAd {
         adUnitID: String,
         enable: Boolean,
         parentView: FrameLayout,
-        type: TypeNativeAd,
+        type: TypeNativeAd = TypeNativeAd.FULL_AD,
     ) {
         if (HeavenSharePref.isShowFullAds) {
             Logger.log(TAG, "Load ad from is show full ad")

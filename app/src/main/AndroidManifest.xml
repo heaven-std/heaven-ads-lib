@@ -11,6 +11,9 @@
         android:theme="@style/Theme.SampleHeavenLib"
         tools:targetApi="31">
         <activity
+            android:name=".NextActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
 

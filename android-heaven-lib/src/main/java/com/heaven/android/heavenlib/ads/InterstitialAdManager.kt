@@ -16,17 +16,19 @@ import java.util.Date
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
 
+
 object HeavenInterstitialAD {
     private var mInterstitialAd: InterstitialAd? = null
     private var durationShowInterAds: Date? = null
     private var isShowingInterAds = AtomicBoolean(false)
+
     private val adRequest = AdRequest.Builder().build()
     private var fbConfig = FBConfig.getAdsConfig()
 
     private const val TAG = "HeavenInterstitialAD"
 
 
-    fun loadInterAd(
+    fun loadAndDisplay(
         activity: Activity,
         adUnitId: String,
         isSplashAd: Boolean = false,
@@ -53,9 +55,8 @@ object HeavenInterstitialAD {
         makeRequestLoadAd(activity, adUnitId, isSplashAd, onDone)
     }
 
-    private fun displayInterAD(activity: Activity, onDoneAds: (String) -> Unit) {
+    private fun displayInterAD(activity: Activity) {
         if (mInterstitialAd == null) {
-            onDoneAds("Interstitial = null")
             return
         }
 
@@ -68,14 +69,12 @@ object HeavenInterstitialAD {
                 Logger.log(TAG, "Ad dismissed fullscreen content.")
                 isShowingInterAds.getAndSet(false)
                 mInterstitialAd = null
-                onDoneAds("Ad dismissed fullscreen content")
             }
 
             override fun onAdFailedToShowFullScreenContent(adError: AdError) {
                 Logger.log(TAG, "Ad failed to show fullscreen content.")
                 isShowingInterAds.getAndSet(false)
                 mInterstitialAd = null
-                onDoneAds("Ad failed to show fullscreen content")
             }
 
             override fun onAdImpression() {
@@ -102,7 +101,7 @@ object HeavenInterstitialAD {
             override fun onAdFailedToLoad(adError: LoadAdError) {
                 mInterstitialAd = null
                 Logger.log(TAG, "AD load failure! ${adError.message}")
-                onDone("Ad failed to load")
+                onDone.invoke("Ad failed to load")
             }
 
             override fun onAdLoaded(interstitialAd: InterstitialAd) {
@@ -115,10 +114,23 @@ object HeavenInterstitialAD {
                 }
                 mInterstitialAd = interstitialAd
                 durationShowInterAds = Date()
-                displayInterAD(activity, onDone)
+
+                onDone.invoke("")
+                displayInterAD(activity)
             }
         }
         InterstitialAd.load(activity, adUnitId, adRequest, callback)
+    }
+
+
+    fun loadAndDisplayV2(
+        activity: Activity,
+        adUnitId: String,
+        isSplashAd: Boolean = false,
+        enable: Boolean,
+        onDone: (String) -> Unit
+    ) {
+
     }
 
     private fun checkDurationShowAds(): Boolean {

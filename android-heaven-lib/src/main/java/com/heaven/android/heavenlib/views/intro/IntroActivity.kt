@@ -1,7 +1,6 @@
 package com.heaven.android.heavenlib.views.intro
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.activity.viewModels
@@ -16,7 +15,6 @@ import com.heaven.android.heavenlib.config.HeavenEnv
 import com.heaven.android.heavenlib.databinding.ActivityIntroBinding
 import com.heaven.android.heavenlib.datas.FBConfig
 import com.heaven.android.heavenlib.datas.HeavenSharePref
-import com.heaven.android.heavenlib.utils.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -100,7 +98,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
         if (indexIntro == configIntro.intros.size - 1) {
             showLoading(true)
             HeavenSharePref.isFirstInstall = false
-            HeavenInterstitialAD.loadInterAd(
+            HeavenInterstitialAD.loadAndDisplay(
                 this,
                 configAdID.interIntroCompleted,
                 isSplashAd = true,
